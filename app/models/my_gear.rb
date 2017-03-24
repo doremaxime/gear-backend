@@ -1,0 +1,2 @@
+class MyGear < ApplicationRecord
+end
