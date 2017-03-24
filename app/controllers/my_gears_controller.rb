@@ -18,7 +18,7 @@ class MyGearsController < ApplicationController
     @my_gear = MyGear.new(my_gear_params)
 
     if @my_gear.save
-      render json: @my_gear, status: :created, location: @my_gear
+      render json: @my_gear, status: :created
     else
       render json: @my_gear.errors, status: :unprocessable_entity
     end
@@ -38,14 +38,15 @@ class MyGearsController < ApplicationController
     @my_gear.destroy
   end
 
-  private
     # Use callbacks to share common setup or constraints between actions.
     def set_my_gear
       @my_gear = MyGear.find(params[:id])
     end
+    private :my_gear
 
     # Only allow a trusted parameter "white list" through.
     def my_gear_params
       params.require(:my_gear).permit(:name, :quantity)
     end
+    private :my_gear_params
 end
