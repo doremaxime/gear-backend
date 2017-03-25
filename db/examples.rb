@@ -17,3 +17,8 @@
 #                password: 'abc123',
 #                password_confirmation: nil)
 # end
+
+MyGear.create!(name: 'rope', quantity: 1)
+MyGear.create!(name: 'shoes', quantity: 2)
+MyGear.create!(name: 'carabener', quantity: 5)
+MyGear.create!(name: 'chalk', quantity: 1)

@@ -1,9 +1,12 @@
-class MyGearsController < ApplicationController
+# frozen_string_literal: true
+
+# :nodoc:
+class MyGearsController < ProtectedController
   before_action :set_my_gear, only: [:show, :update, :destroy]
 
   # GET /my_gears
   def index
-    @my_gears = MyGear.all
+    @my_gears = current_user.my_gears.all
 
     render json: @my_gears
   end
@@ -15,7 +18,7 @@ class MyGearsController < ApplicationController
 
   # POST /my_gears
   def create
-    @my_gear = MyGear.new(my_gear_params)
+    @my_gear = current_user.my_gears.build(my_gear_params)
 
     if @my_gear.save
       render json: @my_gear, status: :created
@@ -38,15 +41,15 @@ class MyGearsController < ApplicationController
     @my_gear.destroy
   end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_my_gear
-      @my_gear = MyGear.find(params[:id])
-    end
-    private :my_gear
+  # Use callbacks to share common setup or constraints between actions.
+  def set_my_gear
+    @my_gear = current_user.my_gears.find(params[:id])
+  end
+  private :set_my_gear
 
-    # Only allow a trusted parameter "white list" through.
-    def my_gear_params
-      params.require(:my_gear).permit(:name, :quantity)
-    end
-    private :my_gear_params
+  # Only allow a trusted parameter "white list" through.
+  def my_gear_params
+    params.require(:my_gear).permit(:name, :quantity)
+  end
+  private :my_gear_params
 end
