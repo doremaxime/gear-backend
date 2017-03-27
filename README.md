@@ -1,20 +1,27 @@
 ## About
 
+This is the back-end repo of a SPA that lets users have a CRUDable database of
+their gear.
 
+## Dependencies
 
-## User Stories
+Bundle install
 
+## Technologies used
 
+- Mac Air '10, Chrome, Atom
+- Front-end: Javascript, SCSS, Handlebars, AJAX, JQuery
+- Back-end: Ruby, Rails, PostgreSQL, Heroku
 
 ## ERD
 
-
+![ERD](ERD.JPG "ERD")
 
 ## Links
 
-- Front-end repo:
-- Heroku:
-- Website:
+- Front-end repo: https://github.com/doremaxime/gear-frontend
+- Heroku: https://capstone-project-gear.herokuapp.com
+- Website: https://doremaxime.github.io/gear-frontend/
 
 ## Authorization
 
