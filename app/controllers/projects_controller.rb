@@ -1,9 +1,12 @@
-class ProjectsController < ApplicationController
+# frozen_string_literal: true
+
+# :nodoc:
+class ProjectsController < ProtectedController
   before_action :set_project, only: [:show, :update, :destroy]
 
   # GET /projects
   def index
-    @projects = Project.all
+    @projects = current_user.projects.all
 
     render json: @projects
   end
@@ -15,10 +18,10 @@ class ProjectsController < ApplicationController
 
   # POST /projects
   def create
-    @project = Project.new(project_params)
+    @project = current_user.projects.build(project_params)
 
     if @project.save
-      render json: @project, status: :created, location: @project
+      render json: @project, status: :created
     else
       render json: @project.errors, status: :unprocessable_entity
     end
@@ -38,14 +41,15 @@ class ProjectsController < ApplicationController
     @project.destroy
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_project
-      @project = Project.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_project
+    @project = current_user.projects.find(params[:id])
+  end
+  private :set_project
 
-    # Only allow a trusted parameter "white list" through.
-    def project_params
-      params.require(:project).permit(:comment)
-    end
+  # Only allow a trusted parameter "white list" through.
+  def project_params
+    params.require(:project).permit(:comment)
+  end
+  private :project_params
 end
