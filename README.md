@@ -1,7 +1,7 @@
 ## About
 
 This is the back-end repo of a SPA that lets users have a CRUDable database of
-their gear.
+their gear and projects.
 
 ## Dependencies
 
@@ -23,9 +23,9 @@ Bundle install
 - Heroku: https://capstone-project-gear.herokuapp.com
 - Website: https://doremaxime.github.io/gear-frontend/
 
-## Authorization
+## ROUTES
 
-### User
+### User Authorization
 
  Verb  |      URI Pattern       | Controller#Action
 :----: | :--------------------: | :---------------:
@@ -240,5 +240,76 @@ curl "${API}${URL_PATH}" \
   --header "Authorization: Token token=$TOKEN"
 ```
 ```md
+HTTP/1.1 204 No Content
+```
+
+### Projects
+
+Verb  |  URI Pattern   | Controller#Action
+:----: | :------------: | :---------------:
+POST  |   `/projects`   |  `project#create`
+GET   |   `/projects`   |  `projects#index`
+GET   | `/projects/:id` |  `projects#show`
+PATCH  | `/projects/:id` | `projects#update`
+DELETE | `/projects/:id` | `projects#destroy`
+
+#### POST / create
+
+```sh
+TOKEN="BAhJIiU1YWYzMTJhZjU0YjBhNjlmODlhYmJmZWJmOGYxZmNjOAY6BkVG--5f22f05bd96584b35dd7c7830524a7994521e0dd" COMMENT="gonna clib half dome" sh scripts/projects/create.sh
+```
+```sh
+HTTP/1.1 201 Created
+Content-Type: application/json; charset=utf-8
+```
+```md
+{"project":{"id":2,"comment":"gonna clib half dome"}}
+```
+
+#### GET / Index
+
+```sh
+TOKEN="BAhJIiU1YWYzMTJhZjU0YjBhNjlmODlhYmJmZWJmOGYxZmNjOAY6BkVG--5f22f05bd96584b35dd7c7830524a7994521e0dd" sh scripts/projects/index.sh
+```
+```sh
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+```
+```md
+{"projects":[{"id":1,"comment":"project infor asjfiosgjiog"},{"id":2,"comment":"gonna clib half dome"},{"id":3,"comment":"will need to climb in NC"}]}
+```
+
+#### GET / Show
+
+```sh
+ID=3 TOKEN="BAhJIiU1YWYzMTJhZjU0YjBhNjlmODlhYmJmZWJmOGYxZmNjOAY6BkVG--5f22f05bd96584b35dd7c7830524a7994521e0dd" sh scripts/projects/show.sh
+```
+```sh
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+```
+```md
+{"project":{"id":3,"comment":"will need to climb in NC"}}
+```
+
+#### PATCH / Update
+
+```sh
+ID=3 TOKEN="BAhJIiU1YWYzMTJhZjU0YjBhNjlmODlhYmJmZWJmOGYxZmNjOAY6BkVG--5f22f05bd96584b35dd7c7830524a7994521e0dd" COMMENT="will need to climb in australia" sh scripts/projects/update.sh
+```
+```sh
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+```
+```md
+{"project":{"id":3,"comment":"will need to climb in australia"}}
+```
+
+#### DELETE / Destroy
+
+```sh
+ID=3 TOKEN="BAhJIiU1YWYzMTJhZjU0YjBhNjlmODlhYmJmZWJmOGYxZmNjOAY6BkVG--5f22f05bd96584b35dd7c7830524a7994521e0dd" sh scripts/projects/destroy.sh
+```
+```sh
 HTTP/1.1 204 No Content
 ```
