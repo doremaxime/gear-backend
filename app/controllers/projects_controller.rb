@@ -11,10 +11,11 @@ class ProjectsController < ProtectedController
     render json: @projects
   end
 
+  # Currently no being use
   # GET /projects/1
-  def show
-    render json: @project
-  end
+  # def show
+  #   render json: @project
+  # end
 
   # POST /projects
   def create

@@ -11,10 +11,11 @@ class MyGearsController < ProtectedController
     render json: @my_gears
   end
 
+  # Curently not being used
   # GET /my_gears/1
-  def show
-    render json: @my_gear
-  end
+  # def show
+  #   render json: @my_gear
+  # end
 
   # POST /my_gears
   def create
