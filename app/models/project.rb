@@ -3,6 +3,6 @@
 # :nodoc:
 class Project < ApplicationRecord
   belongs_to :user
-  validates_length_of :comment, minimum: 1, maximum: 13, allow_blank: false
+  # validates_length_of :comment, minimum: 1, maximum: 13, allow_blank: false
   validates :comment, presence: true
 end
