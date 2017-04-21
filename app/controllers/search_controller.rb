@@ -1,6 +1,19 @@
 # frozen_string_literal: true
-class ExamplesController < OpenReadController
+
+require 'open-uri'
+require 'json'
+class SearchController < OpenReadController
   before_action :set_example, only: [:update, :destroy]
+
+  def weather_search
+    query = params[:search][:query]
+    api_key = Rails.application.secrets.weather_key
+    url = "http://api.openweathermap.org/data/2.5/weather?q=#{query}&units=Imperial&appid=#{api_key}"
+    response = open(url)
+    data_string = response.read
+    json_string = JSON.parse(data_string)
+    render json: json_string
+  end
 
   # GET /examples
   # GET /examples.json
@@ -51,7 +64,7 @@ class ExamplesController < OpenReadController
   end
 
   def example_params
-    params.require(:example).permit(:text)
+    params.require(:query).permit(:query)
   end
 
   private :set_example, :example_params

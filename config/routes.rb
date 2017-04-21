@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   delete '/sign-out/:id' => 'users#signout'
   patch '/change-password/:id' => 'users#changepw'
   resources :users, only: [:index, :show, :update, :destroy, :create]
+
+  post '/search/weather' => 'search#weather_search'
 end
